@@ -11,17 +11,13 @@ local function CreateToggleButton()
     gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
     gui.Parent = Player:WaitForChild("PlayerGui")
 
-    local btn = Instance.new("TextButton")
+    local btn = Instance.new("ImageButton")
     btn.Name = "ZToggle"
     btn.Size = UDim2.new(0, 60, 0, 60)
-    btn.Position = UDim2.new(1, -80, 0.5, -100) -- ✅ Lado direito da tela
+    btn.Position = UDim2.new(1, -80, 0.5, -100)
     btn.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-    btn.Text = "E"
-    btn.TextColor3 = Color3.fromRGB(0, 0, 205)
-    btn.Font = Enum.Font.GrenzeGotisch
-    btn.TextScaled = true
-    btn.TextStrokeTransparency = 0.3
-    btn.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    btn.Image = "rbxassetid://110103893163146"
+    btn.ScaleType = Enum.ScaleType.Fit
     btn.AutoButtonColor = true
     btn.ZIndex = 999
     btn.Parent = gui
@@ -30,14 +26,12 @@ local function CreateToggleButton()
     corner.CornerRadius = UDim.new(0, 40)
     corner.Parent = btn
 
-    -- 👉 Ao clicar, simula tecla LeftControl (abrir/fechar UI)
     btn.MouseButton1Click:Connect(function()
         VirtualInputManager:SendKeyEvent(true, Enum.KeyCode.LeftControl, false, game)
         task.wait(0.1)
         VirtualInputManager:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
     end)
 
-    -- Arrastável com movimentação firme
     local dragging, dragStart, startPos = false
 
     btn.InputBegan:Connect(function(input)
